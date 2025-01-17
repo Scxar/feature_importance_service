@@ -1,22 +1,26 @@
 import math
 import os
 
-import numpy as np
-import pandas as pd
+import numpy as np  # type: ignore
+import pandas as pd  # type: ignore
 
 from src.helpers import get_datasets_path
 
 
 class DatasetService:
     def __init__(self):
+        # Define dataset paths
+        base_path = os.environ.get("DATASET_BASE_PATH", "/home/ivy/feature_importance_service/flask_app/datasets_and_store")
         self.datasets_paths = {
-            'unprocessed_kaggle_2020': get_datasets_path('dataset_2020_2022/2020/heart_2020_cleaned.csv'),
-            'processed_kaggle_2020': get_datasets_path('dataset_2020_2022/2020/heart_2020_cleaned_numerical.csv'),
-            'unprocessed_kaggle_2022': get_datasets_path('dataset_2020_2022/2022/heart_2022_no_nans_numerical.csv'),
+            'unprocessed_kaggle_2020': get_datasets_path(os.path.join(base_path, 'dataset_2020_2022', '2020', 'heart_2020_cleaned.csv')),
+            'processed_kaggle_2020': get_datasets_path(os.path.join(base_path, 'dataset_2020_2022', '2020', 'heart_2020_cleaned_numerical.csv')),
+            'unprocessed_kaggle_2022': get_datasets_path(os.path.join(base_path, 'dataset_2020_2022', '2022', 'heart_2022_no_nans_numerical.csv')),
         }
         self.kaggle_heart_disease_2020 = pd.read_csv(self.datasets_paths['processed_kaggle_2020'])
-        self.kaggle_heart_disease_2020 = self.kaggle_heart_disease_2020.drop(
-            columns=[self.kaggle_heart_disease_2020.columns[0], 'Race'])
+        
+        #self.kaggle_heart_disease_2020 = self.kaggle_heart_disease_2020.drop(
+         #   columns=[self.kaggle_heart_disease_2020.columns[0], 'Race'])
+        
         self.kaggle_heart_disease_2020_columns = {
             'HeartDisease': {'title': 'Heart Disease', 'type': 'boolean', 'values': {'No': 0, 'Yes': 1},
                              'explanation': 'Currently has heart disease'},
@@ -105,7 +109,7 @@ class DatasetService:
                 'explanation': 'How many sleep hours in average'
             },
         }
-
+   
     def transform_2020_input(self, input):
         transformed_input = []
         X = self.kaggle_heart_disease_2020.drop(columns=['HeartDisease'])
@@ -128,15 +132,18 @@ class DatasetService:
         return bmi
 
     def get_numerical_columns(self, dataset_columns):
+        self.dataset_columns = self.kaggle_heart_disease_2020_columns
         columns = getattr(self, dataset_columns)
         numerical_columns = []
         for col, col_settings, in columns.items():
             if col_settings['type'] == 'numerical':
                 numerical_columns.append(col)
 
-        return numerical_columns
+        return numerical_columns 
+   
 
     def get_boolean_columns(self, dataset_columns):
+        self.dataset_columns = self.kaggle_heart_disease_2020_columns
         columns = getattr(self, dataset_columns)
         boolean_columns = []
         for col, col_settings, in columns.items():
@@ -146,6 +153,7 @@ class DatasetService:
         return boolean_columns
 
     def get_categorical_columns(self, dataset_columns):
+        self.dataset_columns = self.kaggle_heart_disease_2020_columns
         columns = getattr(self, dataset_columns)
         category_columns = []
         for col, col_settings, in columns.items():

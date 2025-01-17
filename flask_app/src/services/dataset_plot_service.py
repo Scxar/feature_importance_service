@@ -1,9 +1,9 @@
 import math
 import os
 
-import matplotlib.pyplot as plt
-import plotly.graph_objects as go
-from plotly.subplots import make_subplots
+import matplotlib.pyplot as plt # type: ignore
+import plotly.graph_objects as go # type: ignore
+from plotly.subplots import make_subplots # type: ignore
 
 from src.services.dataset_service import DatasetService
 

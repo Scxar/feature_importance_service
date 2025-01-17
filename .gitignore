@@ -27,3 +27,12 @@
 /flask_app/.env
 /flask_app/store/
 /flask_app/templates/
+/flask_app/datasets_and_store/
+/flask_app/venv3.10
+/flask_app/__pycache__
+/flask_app/src/api/controllers/__pycache__
+/flask_app/src/services/__pycache__
+/flask_app/__pycache__
+/flask_app/src/api/__pycache__
+/flask_app/src/models/__pycache__
+/flask_app/src/__pycache__

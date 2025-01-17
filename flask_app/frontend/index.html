@@ -10,7 +10,19 @@
     <title>Bogalusa</title>
 </head>
 <script>
-    const columns = {{ columns|safe}}
+    /*const columns = {{ columns|safe}}*/
+    var columns = JSON.parse("{{ columns | safe }}");
+    console.log(columns);  // Debugging
+   /* var columns = JSON.parse("{{ columns | safe }}");
+        console.log(columns);  // Debugging
+
+        // Example: Displaying the columns in a simple list
+        var columnsList = document.getElementById("columns");
+        columns.forEach(function(col) {
+            var li = document.createElement("li");
+            li.textContent = col;
+            columnsList.appendChild(li);
+        });*/
 </script>
 <body>
 <div id="app"></div>

@@ -1,7 +1,7 @@
-import pandas as pd
-from dotenv import load_dotenv
+import pandas as pd # type: ignore
+from dotenv import load_dotenv # type: ignore
 from src.services.dataset_service import DatasetService
-load_dotenv()
+load_dotenv(dotenv_path=".env")
 
 if __name__ == '__main__':
     dataset_service = DatasetService()
@@ -20,6 +20,6 @@ if __name__ == '__main__':
                 .apply(lambda x: abs(x - col_settings['values'][1])))
 
     kaggle_2020_ds = kaggle_2020_ds.drop(
-        columns=['Race'])
+    columns=['Race'])
     kaggle_2020_ds.to_csv(
         dataset_service.datasets_paths['processed_kaggle_2020'])
