@@ -10,7 +10,8 @@
     <title>Bogalusa</title>
 </head>
 <script>
-    const columns = {{ columns|safe}}
+    var columns = JSON.parse("{{ columns | safe}}");
+    console.log(columns);
 </script>
 <body>
 <div id="app"></div>

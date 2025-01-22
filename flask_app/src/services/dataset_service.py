@@ -9,6 +9,7 @@ from src.helpers import get_datasets_path
 
 class DatasetService:
     def __init__(self):
+        #base_path = os.environ.get("DATASET_BASE_PATH", "/home/bogalusa/CodeProjects/feature_importance_service/flask_app/datasets")
         self.datasets_paths = {
             'unprocessed_kaggle_2020': get_datasets_path('dataset_2020_2022/2020/heart_2020_cleaned.csv'),
             'processed_kaggle_2020': get_datasets_path('dataset_2020_2022/2020/heart_2020_cleaned_numerical.csv'),
@@ -128,6 +129,7 @@ class DatasetService:
         return bmi
 
     def get_numerical_columns(self, dataset_columns):
+        self.dataset_columns = self.kaggle_heart_disease_2020_columns
         columns = getattr(self, dataset_columns)
         numerical_columns = []
         for col, col_settings, in columns.items():
@@ -137,6 +139,7 @@ class DatasetService:
         return numerical_columns
 
     def get_boolean_columns(self, dataset_columns):
+        self.dataset_columns = self.kaggle_heart_disease_2020_columns
         columns = getattr(self, dataset_columns)
         boolean_columns = []
         for col, col_settings, in columns.items():
@@ -146,6 +149,7 @@ class DatasetService:
         return boolean_columns
 
     def get_categorical_columns(self, dataset_columns):
+        self.dataset_columns = self.kaggle_heart_disease_2020_columns
         columns = getattr(self, dataset_columns)
         category_columns = []
         for col, col_settings, in columns.items():

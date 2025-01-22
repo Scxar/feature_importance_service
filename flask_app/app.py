@@ -12,7 +12,7 @@ from src.api.rand_forest_routes import rand_forest_blueprint
 from src.api.svm_routes import svm_blueprint
 from src.api.xgb_routes import xgb_blueprint
 
-load_dotenv()
+load_dotenv(dotenv_path=".env")
 
 FLASK_DEBUG = os.getenv('FLASK_DEBUG', 0)
 print(f"FLASK_DEBUG: {FLASK_DEBUG}")

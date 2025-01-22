@@ -1,8 +1,10 @@
 import json
 
-from flask import Blueprint, render_template
+from flask import Blueprint, Flask, render_template
 
 from src.api.controllers.dataset_controller import get_2020_dataset_columns
+
+app = Flask(__name__, template_folder='/home/bogalusa/CodeProjects/feature_importance_service/flask_app/frontend')
 
 base_blueprint = Blueprint('base', __name__)
 
